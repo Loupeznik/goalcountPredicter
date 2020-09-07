@@ -26,11 +26,9 @@ def read_resfile(file,team1,team2):
 
 def get_results(matches):
     results = []
-    i = 0
 
     for match in matches:
-        results.append(read_resfile('csv/2019_2020.csv',matches[i][1],matches[i][0]))
-        i += 1
+        results.append(read_resfile('csv/2019_2020.csv',match[1],match[0]))
 
     return results #return 2D array of results of matchups from the last season
 
