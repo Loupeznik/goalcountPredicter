@@ -55,7 +55,7 @@ def scrape_latest_results(team1,team2):
                 results.append(result)
             else:
                 continue
-    
+    #čekovat minulé matchupy těch dvou zadaných týmů, přihlédnout k výsledku toho zápasu skrz nějaký koeficient (možná na to zrobit jinou funkci co to bude vracet samostatně)
     return results #returns 2D array of scraped results from this season
 
 matches = get_matches()
@@ -63,3 +63,19 @@ matches = get_matches()
 print (matches)
 print(get_results(matches))
 print (scrape_latest_results('Apollon Limassol','Honka'))
+
+print('-------')
+
+try:
+    for match in matches:
+        results = scrape_latest_results(match[0],match[1])
+        if results is None:
+            print('No matches found for {} and {}'.format(match[0],match[1]))
+        else:
+            #logika statistické predikce
+            print(match)
+            print(teams)
+            print(results)
+            print('---')
+except:
+    print('ERROR')
