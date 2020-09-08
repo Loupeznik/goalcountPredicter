@@ -1,5 +1,0 @@
-Bude predikovac počty golů, které padnou v zadaných mačích podle
- - CSV z minulé sezony (2019/2020) -> tohle bude fetchovat jen matchupy mezi těma dvěma zadanýma soupeřema
- - posledních výsledků scrapnutých z internetu -> tohle bude fetchovat VŠECHNY výsledky obou týmů za TUTO sezonu
-	-> na základě tohodle postavit model, který bude predikovat kolik gólů by mělo v zápase minimálně padnout
-	-> je možné ho ještě nechat vyhodnotit oproti kurzům z betovacích stránek, pokud bude kurz po 1.25, scrapne zápas že se na to neoplátí vsadit
