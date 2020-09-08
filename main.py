@@ -1,5 +1,7 @@
 import csv
 import os
+from bs4 import BeautifulSoup as bs
+import requests
 
 def get_matches():
     matches = []
@@ -33,7 +35,31 @@ def get_results(matches):
     return results #return 2D array of results of matchups from the last season
 
 
+def scrape_latest_results(team1,team2):
+    results = []
+    #url = 'https://www.skysports.com/premier-league-results'
+    url = 'https://www.skysports.com/europa-league-results'
+    page = requests.get(url)
+    soup = bs(page.content, 'html.parser')
+
+    if 'No results currently available' in page.text:
+        return None
+    else:
+        content = soup.find_all('div', class_='fixres__item')
+        for item in content:
+            t1 = item.find('span', class_='matches__item-col matches__participant matches__participant--side1')
+            t2 = item.find('span', class_='matches__item-col matches__participant matches__participant--side2')
+            res = item.find('span', class_='matches__teamscores')
+            if team1 in t1.text or team2 in t2.text:
+                result = [int(i) for i in res.text.split() if i.isdigit()]
+                results.append(result)
+            else:
+                continue
+    
+    return results #returns 2D array of scraped results from this season
+
 matches = get_matches()
 #results = read_resfile('csv/2019_2020.csv',matches[1][1],matches[1][0])
 print (matches)
 print(get_results(matches))
+print (scrape_latest_results('Apollon Limassol','Honka'))
