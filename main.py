@@ -59,11 +59,8 @@ def scrape_latest_results(team1,team2):
     return results #returns 2D array of scraped results from this season
 
 matches = get_matches()
+resfile = 'csv/2019_2020.csv'
 #results = read_resfile('csv/2019_2020.csv',matches[1][1],matches[1][0])
-print (matches)
-print(get_results(matches))
-print (scrape_latest_results('Apollon Limassol','Honka'))
-
 print('-------')
 
 try:
@@ -73,9 +70,20 @@ try:
             print('No matches found for {} and {}'.format(match[0],match[1]))
         else:
             #logika statistické predikce
-            print(match)
-            print(teams)
-            print(results)
+            goalcount = []
+            for result in results:
+                goalcount.append(sum(result))
+            average_goals = sum(goalcount)/len(goalcount)
+            print('Average goalcount in matchups of {} and {} is {}'.format(match[0],match[1],average_goals))
+            try:
+                last_season_matchups = read_resfile(resfile,match[1],match[0])
+                if not last_season_matchups:
+                    print('No last season matchup was found for {} and {}'.format(match[0],match[1]))
+                else:
+                    #zpracovat výsledky z minulé sezony
+                    print(last_season_matchups)
+            except:
+                print('There was an error fetching the last season result sheet (check if it is present in the /csv folder)')
             print('---')
 except:
     print('ERROR')
