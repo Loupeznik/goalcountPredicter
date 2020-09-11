@@ -19,5 +19,5 @@ Version: 1.0
 
 ## License
 
-This project is MIT licensed
+This project is MIT licensed <br>
 Development not yet complete, pull requests are welcome
